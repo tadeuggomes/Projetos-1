@@ -23,10 +23,6 @@ def add_cliente(nome, idade, cep):
     cep= input("DIGITE O CEP:\n>>>")
     add_cliente(nome, idade,cep)
 
-
-
-
-
 #1. ADICIONAR USUÁRIO
 #2. LISTAR USUÁRIOS
 #3. ATUALIZAR USUÁRIO
