@@ -63,10 +63,6 @@ def listar_clientes():
             print("-" * 60)
     else:
         print("NÃO TEM CLIENTES CADASTRADOS.")
-        
-
-
-
 
 
 
