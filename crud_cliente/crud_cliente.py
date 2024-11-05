@@ -28,7 +28,7 @@ def add_clientes(nome, idade, cep):
     clientes.append({'nome': nome, 'idade': idade, 'CEP': cep})
     with open(arquivo, 'w') as f:
         json.dump(clientes, f, indent=4, ensure_ascii=False)
-    print('CLIENTE ADICIONADO!!')
+    print('👤 CLIENTE ADICIONADO!!!')
     
 def atualizar_cadastro_clientes(nome_velho, nome_novo , idade_nova, cep_novo):
     clientes= carregar_cliente()
@@ -41,7 +41,7 @@ def atualizar_cadastro_clientes(nome_velho, nome_novo , idade_nova, cep_novo):
             break
     with open(arquivo, 'w') as f:
         json.dump(clientes, f, indent=4, ensure_ascii=False)
-    print("CLIENTE ATUALIZADO!!!") 
+    print("✅ CLIENTE ATUALIZADO!!!") 
    
     nome_velho = input("DIGITE O NOME A SER ATUALIZADO:\n>>>")
     nome_novo = input("DIGITE O NOVO NOME:\n>>>")
@@ -54,7 +54,7 @@ def listar_clientes():
     
     if clientes:
         print("-" * 60)
-        print("LISTA DE CLIENTES:")
+        print("👤 LISTA DE CLIENTES:")
         for cliente in clientes:
             print("-" * 60)
             print(f"Nome: {cliente['nome']}")
@@ -62,7 +62,7 @@ def listar_clientes():
             print(f"CEP: {cliente['CEP']}")
             print("-" * 60)
     else:
-        print("NÃO TEM CLIENTES CADASTRADOS.")
+        print("❌ NÃO TEM CLIENTES CADASTRADOS!!!")
         
 def excluir_clientes(nome):
     #Exclui um cliente da lista e do arquivo Json, e salva as alterações
@@ -73,7 +73,7 @@ def excluir_clientes(nome):
 
     with open(arquivo, 'w') as f:
         json.dump(clientes, f, indent=4, ensure_ascii=False) #Salva as alterções no arquivo Json
-    print(" CLIENTE EXCLUÍDO COM SUCESSO!")
+    print("✅ CLIENTE EXCLUÍDO COM SUCESSO!!!")
 
 def buscar_cliente(nome):
     #Busca e exibe os dados de um cliente especifico, pelo nome.
@@ -86,19 +86,16 @@ def buscar_cliente(nome):
             print(f"NOME: {cliente['nome']}, IDADE: {cliente['idade']}, CEP: {cliente['CEP']}")
             encontrado = True
     if not encontrado:
-        print(" CLIENTE NÃO CADASTRADO!.")
+        print("❌ CLIENTE NÃO CADASTRADO!!!")
     
-
-
 def menu_inicial():
   
     print(" ---->>> FLOWSTOCK <<<---- ")
     print("          1 - MENU CLIENTE ")
     print("          2 - SAIR ")
     
-    
 def exibir_menu():
-    print("\nMENU:")
+    print("\nMENU CLIENTE:")
     print("1. ADICIONAR CLIENTE")
     print("2. LISTAR CLIENTES")
     print("3. ATUALIZAR CLIENTE")
@@ -106,12 +103,11 @@ def exibir_menu():
     print("5. LISTAR UM CLIENTE")
     print("6. VOLTAR AO MENU ANTERIOR")
 
-
 def main():
     
     while True:
         menu_inicial()
-        opcao_inicio = int(input("INFORME UMA OPÇÃO: "))
+        opcao_inicio = int(input("INFORME UMA OPÇÃO:\n>>>"))
 
         match (opcao_inicio):
             case 1:
@@ -145,11 +141,11 @@ def main():
                     else:
                         print(" OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!")
             case 2:
-                print(" SAINDO...")
+                print("🚀 SAINDO...")
                 sleep(3)
                 break
             case __:
-                print("OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!")
+                print("❌ OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!")
 
 if __name__ == "__main__":
     main()
