@@ -63,6 +63,7 @@ def listar_clientes():
             print("-" * 60)
     else:
         print("NÃO TEM CLIENTES CADASTRADOS.")
+        
 def excluir_clientes(nome):
     #Exclui um cliente da lista e do arquivo Json, e salva as alterações
     clientes = carregar_cliente()   # Localiza o cliente pelo nome
@@ -93,8 +94,7 @@ def menu_inicial():
   
     print(" ---->>> FLOWSTOCK <<<---- ")
     print("          1 - MENU CLIENTE ")
-    print("          2 - MENU ESTOQUE ")
-    print("          3 - SAIR ")
+    print("          2 - SAIR ")
     
     
 def exibir_menu():
@@ -145,11 +145,11 @@ def main():
                     else:
                         print(" OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!")
             case 2:
-                print("SAINDO...")
+                print(" SAINDO...")
                 sleep(3)
                 break
             case __:
                 print("OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!")
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     main()
