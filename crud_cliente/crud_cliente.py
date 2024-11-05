@@ -63,32 +63,93 @@ def listar_clientes():
             print("-" * 60)
     else:
         print("NÃO TEM CLIENTES CADASTRADOS.")
+def excluir_clientes(nome):
+    #Exclui um cliente da lista e do arquivo Json, e salva as alterações
+    clientes = carregar_cliente()   # Localiza o cliente pelo nome
+    for cliente in clientes:  
+        if cliente['nome'] == nome:
+            clientes.remove(cliente)  #Remove o cliente
+
+    with open(arquivo, 'w') as f:
+        json.dump(clientes, f, indent=4, ensure_ascii=False) #Salva as alterções no arquivo Json
+    print(" CLIENTE EXCLUÍDO COM SUCESSO!")
+
+def buscar_cliente(nome):
+    #Busca e exibe os dados de um cliente especifico, pelo nome.
+    #Se o cliente não for encontrado, informa que o cliente não foi cadastrado
+    clientes = carregar_cliente()
+    encontrado = False
+
+    for cliente in clientes:
+        if cliente['nome'] == nome:
+            print(f"NOME: {cliente['nome']}, IDADE: {cliente['idade']}, CEP: {cliente['CEP']}")
+            encontrado = True
+    if not encontrado:
+        print(" CLIENTE NÃO CADASTRADO!.")
+    
 
 
+def menu_inicial():
+  
+    print(" ---->>> FLOWSTOCK <<<---- ")
+    print("          1 - MENU CLIENTE ")
+    print("          2 - MENU ESTOQUE ")
+    print("          3 - SAIR ")
+    
+    
+def exibir_menu():
+    print("\nMENU:")
+    print("1. ADICIONAR CLIENTE")
+    print("2. LISTAR CLIENTES")
+    print("3. ATUALIZAR CLIENTE")
+    print("4. EXCLUIR CLIENTE")
+    print("5. LISTAR UM CLIENTE")
+    print("6. VOLTAR AO MENU ANTERIOR")
 
 
+def main():
+    
+    while True:
+        menu_inicial()
+        opcao_inicio = int(input("INFORME UMA OPÇÃO: "))
 
+        match (opcao_inicio):
+            case 1:
+                while True: 
+                    exibir_menu()
+                    opcao_cliente = input("ESCOLHA UMA OPÇÃO:\n>>>")
 
+                    if opcao_cliente == "1":
+                        nome = input(" INFORME O NOME:\n>>>")
+                        idade = input(" INFORME A IDADE:\n>>>")
+                        cep = input(" INFORME O CEP:\n>>>")
+                        add_clientes(nome, idade, cep)
+                    elif opcao_cliente == "2":
+                        listar_clientes()
+                    elif opcao_cliente == "3":
+                        nome_velho = input("INSIRA O NOME A SER ATUALIZADO:\n>>>")
+                        nome_novo = input("INSIRA O NOVO NOME:\n>>>")
+                        idade_nova = input("INSIRA A NOVA IDADE:\n>>>")
+                        cep_novo = input("INSIRA O NOVO CEP:\n>>>")
+                        atualizar_cadastro_clientes(nome_velho, nome_novo , idade_nova, cep_novo)
+                    elif opcao_cliente == "4":
+                        nome = input("INSIRA O NOME DO USUÁRIO A SER EXCLUÍDO:\n>>>")
+                        excluir_clientes(nome)
+                    elif opcao_cliente == "5":
+                        nome = input("INSIRA O NOME DO USUÁRIO:\n>>>")
+                        buscar_cliente(nome)
+                    elif opcao_cliente == "6":
+                        print("VOLTANDO AO MENU ANTERIOR...")
+                        sleep(3)
+                        break
+                    else:
+                        print(" OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!")
+            case 2:
+                print("SAINDO...")
+                sleep(3)
+                break
+            case __:
+                print("OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!")
 
-
-
-
-
-
-
-
-
-
-
-
-
-#0. CARREGAR CLIENTE- TADEU 
-#1. ADICIONAR CLIENTE- TADEU
-#2. LISTAR CLIENTES- TADEU
-#3. ATUALIZAR CLIENTE- TADEU
-
-#4. EXCLUIR CLIENTE- DAVID
-#5. LISTAR UM CLIENTE DAVID
-#6. VOLTAR AO MENU ANTERIOR- DAVID
-
-#7. ENCERRAR CADASTRO
+if __name__ == "_main_":
+    main()
