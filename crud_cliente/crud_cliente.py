@@ -136,13 +136,13 @@ def main():
                         buscar_cliente(nome)
                     elif opcao_cliente == "6":
                         print("VOLTANDO AO MENU ANTERIOR...")
-                        sleep(2)
+                        sleep(1)
                         break
                     else:
                         print("❌ OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!!!")
             case 2:
                 print("🚀 SAINDO...")
-                sleep(2)
+                sleep(1)
                 break
             case __:
                 print("❌ OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!!!")
