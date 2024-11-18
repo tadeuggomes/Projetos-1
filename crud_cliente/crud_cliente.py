@@ -5,8 +5,8 @@ from time import sleep #Criar pausas controladas durante a execução
 # Definindo o caminho do arquivo no escopo global:
 arquivo = os.path.join(os.path.dirname(__file__), 'cliente.json')
 
-# w escrever
-# R ler
+# w - escrever
+# R - ler
 def carregar_cliente():
     if not os.path.exists(arquivo):
         # Verifica se o arquivo (armazenado na variável 'arquivo') existe. 'os.path.exists' retorna False se o arquivo não existir
