@@ -1,8 +1,8 @@
 import json #Manipular dados em JSON
 import os #Fazer operações de sistema, como verificar e manipular arquivos
-from time import sleep #Criar pausas controladas durante a execução do programa
+from time import sleep 
 
-# Definindo o caminho do arquivo no escopo global:
+
 arquivo = os.path.join(os.path.dirname(__file__), 'produtos.json') 
 
 def carregar_produto():
