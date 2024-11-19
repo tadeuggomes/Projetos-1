@@ -1,0 +1,12 @@
+[
+    {
+        "bebida": "cocacola",
+        "preco": 5.0,
+        "codigo": "asa65"
+    },
+    {
+        "bebida": "suco",
+        "preco": 6.0,
+        "codigo": "fgg1"
+    }
+]
