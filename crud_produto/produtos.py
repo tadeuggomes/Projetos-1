@@ -1,18 +1,16 @@
-import json #Manipular dados em JSON
-import os #Fazer operações de sistema, como verificar e manipular arquivos
+import json 
+import os 
 from time import sleep 
 
 
 arquivo = os.path.join(os.path.dirname(__file__), 'produtos.json') 
 
 def carregar_produto():
-    # Verifica se o arquivo (armazenado na variável 'arquivo') existe. 'os.path.exists' retorna False se o arquivo não existir
+    
     if not os.path.exists(arquivo):
         with open(arquivo, 'w') as f:
-            json.dump([], f, indent=4)  # Inicializa como lista vazia 
-              # json.dump -> serve para gravar (salvar) um objeto em arquivo json
-              # Salva uma lista vazia no arquivo JSON recém-criado, formatado com indentação para legibilidade. 
-              # Isso cria uma estrutura de dados JSON válida para evitar erros ao tentar ler o arquivo depois.
+            json.dump([], f, indent=4)   
+            
     with open(arquivo, 'r') as f: # r -> read 
         return json.load(f)
 
@@ -30,8 +28,8 @@ def listar_produto():
     if  produtos:  
         print("LISTA DE PRODUTOS:")
         for produto in produtos:
-            print(f"PRODUTO: {produto.get('bebida')}") #O método .get() permite que você busque o valor associado
-                                                       #a uma chave específica em um dicionário.
+            print(f"PRODUTO: {produto.get('bebida')}") 
+                                                       
             print(f"PREÇO: {produto.get('preco')}")
             print(f"CÓDIGO: {produto.get('codigo')}")
     
@@ -42,7 +40,7 @@ def atualizar_produto(produto_antigo, produto_novo, preco_novo, codigo_novo):
     produtos = carregar_produto()
     produto_encontrado = False
     for produto in produtos:
-        if produto.get('bebida') == produto_antigo: #get -> retorna a lista
+        if produto.get('bebida') == produto_antigo:
             produto['bebida'] = produto_novo
             produto['preco'] = preco_novo
             produto['codigo'] = codigo_novo
@@ -50,18 +48,18 @@ def atualizar_produto(produto_antigo, produto_novo, preco_novo, codigo_novo):
             break
 
     if produto_encontrado:
-        with open(arquivo, 'w') as f: # abrir arquivo no modo escrita
-            json.dump(produtos, f, indent=4, ensure_ascii=False) #GRAVAR O ARQUIVO DENTRO DO CÓDIGO JSON
+        with open(arquivo, 'w') as f: 
+            json.dump(produtos, f, indent=4, ensure_ascii=False) 
         print("✅ PRODUTO ATUALIZADO COM SUCESSO!")
     else:
         print("⚠️ PRODUTO NÃO ENCONTRADO PARA ATUALIZAÇÃO.")
 
 def excluir_produto(nome_produto):
-    produtos = carregar_produto()            # Carrega a lista de produtos
-                                             # Encontra e remove o produto da lista usando a função remove()
-    for produto in produtos:                 # Usa uma cópia da lista para evitar problemas durante a iteração
+    produtos = carregar_produto()        
+                                        
+    for produto in produtos:                 
         if produto.get('bebida') == nome_produto:
-            produtos.remove(produto)         # Remove o produto se o nome corresponder
+            produtos.remove(produto)         
 
     print(f"Produto '{nome_produto}")
 
