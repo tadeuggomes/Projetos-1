@@ -11,7 +11,7 @@ def carregar_produto():
         with open(arquivo, 'w') as f:
             json.dump([], f, indent=4)   
             
-    with open(arquivo, 'r') as f: # r -> read 
+    with open(arquivo, 'r') as f: 
         return json.load(f)
 
 def adicionar_produto(produto, preco, codigo):
