@@ -2,6 +2,7 @@ import json
 import os 
 from time import sleep 
 
+
 arquivo = os.path.join(os.path.dirname(__file__), 'cliente.json')
 
 def carregar_cliente():
@@ -14,6 +15,8 @@ def carregar_cliente():
     with open(arquivo, 'r') as f:
         return json.load(f)
         
+    
+
     
 def add_clientes(cpf, idade, cep):
     clientes=carregar_cliente()
@@ -139,7 +142,7 @@ def main():
                     else:
                         print("❌ OPÇÃO NÃO EXISTENTE. INSIRA OUTRA OPÇÃO!!!")
             case 2:
-                print("🚀 SAINDO...")
+                print("🚀 SAINDO....")
                 sleep(1)
                 break
             case __:
