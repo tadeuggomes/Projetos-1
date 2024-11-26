@@ -4,8 +4,6 @@ from time import sleep
 
 arquivo = os.path.join(os.path.dirname(__file__), 'cliente.json')
 
-
-
 def carregar_cliente():
     if not os.path.exists(arquivo):
         
@@ -100,6 +98,8 @@ def exibir_menu():
     print(" 4. EXCLUIR CLIENTE")
     print(" 5. LISTAR UM CLIENTE")
     print(" 6. VOLTAR AO MENU ANTERIOR")
+
+
 
 def main():
     
