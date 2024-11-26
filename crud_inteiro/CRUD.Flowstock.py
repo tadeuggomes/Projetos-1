@@ -74,6 +74,7 @@ def listar_clientes():
     clientes = carregar_cliente()
     
     if clientes:
+        
         print("👤 LISTA DE CLIENTES:")
         for cliente in clientes:
             print(f"Nome: {cliente['nome']}")
@@ -163,9 +164,9 @@ def excluir_produto(nome_produto):
 
 # CRUD DOS FORNCEDORES 
 
-def adicionar_fornecedor(cnpj):
+def adicionar_fornecedor(cnpj, empresa , pacote):
     fornecedores = carregar_fornecedores()
-    fornecedores.append({'cnpj': cnpj})
+    fornecedores.append({'cnpj': cnpj , 'nome_empresa': empresa , 'pacote': pacote})
     with open(arquivo_fornecedores, 'w') as f:
         json.dump(fornecedores, f, indent=4, ensure_ascii=False)
     print("FORNECEDOR ADICIONADO COM SUCESSO!") 
@@ -175,20 +176,27 @@ def listar_fornecedores():
     if fornecedores:
         print("LISTA DE FORNECEDORES:")
         for fornecedor in fornecedores:
-            print(f"CNPJ: {fornecedor['cnpj']}")
+            print(f"CNPJ: {fornecedor['cnpj']}") 
+            print(f"Nome da Empresa: {fornecedor['nome_empresa']}")  
+            print(f"Pacote: {fornecedor['pacote']}")
+            
     else:
-        print("NENHUM FORNECEDOR CADASTRADO.")
+        print(" 🙁 NENHUM FORNECEDOR CADASTRADO.")
 
-def atualizar_fornecedor(antigo_cnpj, novo_cnpj):
+def atualizar_fornecedor(antigo_cnpj, novo_cnpj , antiga_empresa , nova_empresa , pacote_antigo , pacote_novo):
     fornecedores = carregar_fornecedores()
     for fornecedor in fornecedores:
         
         if fornecedor['cnpj'] == antigo_cnpj:
-            fornecedor['cnpj'] = novo_cnpj
+            fornecedor['cnpj'] = novo_cnpj 
+            fornecedor['nome_empresa'] = antiga_empresa 
+            fornecedor['nome_empresa'] = nova_empresa 
+            fornecedor['pacote'] = pacote_antigo
+            fornecedor['pacote'] = pacote_novo
             print("FORNECEDOR ATUALIZADO COM SUCESSO!")
             break
     else:
-        print("FORNECEDOR NÃO ENCONTRADO.")
+        print(" 🙁 FORNECEDOR NÃO ENCONTRADO.")
     
     with open(arquivo_fornecedores, 'w') as f:
         json.dump(fornecedores, f, indent=4, ensure_ascii=False)
@@ -200,35 +208,39 @@ def excluir_fornecedor(cnpj):
         if fornecedor['cnpj'] == cnpj:
             fornecedores.remove(fornecedor)  
             encontrado_2 = True
-            print(f"CNPJ: {fornecedor['cnpj']} EXCLUÍDO COM SUCESSO!")
+            print(f"CNPJ: {fornecedor['cnpj']} ❌ EXCLUÍDO COM SUCESSO!")
             break 
 
     with open(arquivo_fornecedores, 'w') as f:
         json.dump(fornecedores, f, indent=4, ensure_ascii=False)
 
     if not encontrado_2:
-        print("NENHUM FORNECEDOR ENCONTRADO COM ESSE CNPJ.")
+        print("✅ NENHUM FORNECEDOR ENCONTRADO COM ESSE CNPJ.")
 
 def buscar_fornecedor(cnpj):
     fornecedores = carregar_fornecedores()
     encontrado = False
     for fornecedor in fornecedores:
         if fornecedor['cnpj'] == cnpj:
-            print(f"CNPJ: {fornecedor['cnpj']}, CNPJ: {fornecedor['cnpj']}")
+            print(f"CNPJ: {fornecedor['cnpj']}, NOME DA EMPRESA {fornecedor['nome_empresa']} , PACOTE {fornecedor['pacote']}") 
             encontrado = True
     if not encontrado:
-        print("NENHUM FORNECEDOR CADASTRADO.")
+        print(" 🙁 NENHUM FORNECEDOR CADASTRADO.")
 
 #MENUS 
-def menu_inicial():
+def menu_inicial(): 
+    
+    print(cor.CIANO + "=" * 55 + cor.RESET)
     print("---->>> FLOWSTOCK <<<---- ")
     print(" 1 - MENU CLIENTE ")
     print(" 2-  MENU DO PRODUTO") 
     print(" 3 - MENU DO FORNECEDOR")
     print(" 4 - SAIR ") 
+    print(cor.CIANO + "=" * 55 + cor.RESET)
     
 def exibir_menu_cliente():
     
+    print(cor.VERMELHO + "=" * 50 + cor.RESET)
     print("---->>> MENU CLIENTE <<<---- ")
     print(" 1. ADICIONAR CLIENTE")
     print(" 2. LISTAR CLIENTES")
@@ -236,27 +248,31 @@ def exibir_menu_cliente():
     print(" 4. EXCLUIR CLIENTE")
     print(" 5. LISTAR UM CLIENTE")
     print(" 6. VOLTAR AO MENU ANTERIOR") 
-    
+    print(cor.VERMELHO + "=" * 50 + cor.RESET)
 
 def exibir_menu_produto():
     
+    print(cor.VERDE + "=" * 40  + cor.RESET)
     print("\n ---->>> MENU PRODUTO <<<----:")
     print("1. ADICIONAR PRODUTO")
     print("2. LISTAR PRODUTO")
     print("3. ATUALIZAR PRODUTO")
     print("4. EXCLUIR PRODUTO")
-    print("5. VOLTAR AO MENU ANTERIOR")
+    print("5. VOLTAR AO MENU ANTERIOR") 
+    print(cor.VERDE + "=" * 40 + cor.RESET)
     
 
 def exibir_menu_fornecedor():
     
+    print(cor.AMARELO + "=" * 60 + cor.RESET)
     print(" ---->>> MENU DO FORNECEDOR <<<---- ")
     print("1 - ADICIONAR FORNECEDOR")
     print("2 - LISTAR FORNECEDORES")
     print("3 - ATUALIZAR FORNECEDOR")
     print("4 - EXCLUIR FORNECEDOR")
     print("5 - BUSCAR FORNECEDOR")
-    print("6 - SAIR")
+    print("6 - SAIR") 
+    print(cor.AMARELO + "=" * 60 + cor.RESET)
 
 def main():
     
@@ -338,16 +354,22 @@ def main():
 
                     match opcao_fornecedor:
                         case "1":
-                            cnpj = input("DIGITE O CNPJ DO FORNECEDOR:\n>>> ")
-                            adicionar_fornecedor(cnpj)
+                            cnpj = input("DIGITE O CNPJ DO FORNECEDOR:\n>>> ") 
+                            empresa = input("DIGITE O NOME DA EMPRESA:\n>>> ")  
+                            pacote = input("DIGITE O PACOTE QUE SERÁ ENTREGUE:\n>>>")
+                            adicionar_fornecedor(cnpj, empresa,pacote)
                             
                         case "2":
                             listar_fornecedores()
                             
                         case "3":
                             antigo_cnpj = input("DIGITE O CNPJ A SER ATUALIZADO:\n>>> ")
-                            novo_cnpj = input("DIGITE O NOVO CNPJ:\n>>> ")
-                            atualizar_fornecedor(antigo_cnpj,novo_cnpj)
+                            novo_cnpj = input("DIGITE O NOVO CNPJ:\n>>> ") 
+                            antiga_empresa = input("DIGITE O NOME DO ANTIGO FORNECEDOR: ")
+                            nova_empresa = input("DIGITE O NOME DO NOVO FORNECEDOR: ")
+                            pacote_antigo = input("DIGITE O PACOTE ANTIGO: ") 
+                            pacote_novo = input("DIGITE O PACOTE NOVO")
+                            atualizar_fornecedor(antigo_cnpj,novo_cnpj, antiga_empresa , nova_empresa , pacote_novo , pacote_antigo)
                             
                         case "4":
                             cnpj = input("DIGITE O CNPJ DO FORNECEDOR A SER EXCLUÍDO:\n>>> ")
