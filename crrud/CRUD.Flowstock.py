@@ -11,10 +11,10 @@ class cor:
     CIANO = '\033[96m'
     RESET = '\033[0m'
 
-#Caminho do Arquivo JSON
-arquivo_cliente = os.path.join(os.path.dirname(__file__), 'cliente.json')
-arquivo_produto = os.path.join(os.path.dirname(__file__), 'produtos.json')
-arquivo_fornecedores = os.path.join(os.path.dirname(__file__), 'fornecedores.json') 
+
+arquivo_cliente = os.path.join(os.path.dirname(__file__), 'cliente2.json')
+arquivo_produto = os.path.join(os.path.dirname(__file__), 'produto2.json')
+arquivo_fornecedores = os.path.join(os.path.dirname(__file__), 'fornecedores2.json') 
 
 def carregar_cliente():
     if not os.path.exists(arquivo_cliente):
@@ -37,15 +37,15 @@ def carregar_fornecedores():
     with open(arquivo_fornecedores, 'r') as f:
         return json.load(f)
 
-# CRUD DO CLIENTE 
+ 
 
 def adicionar_clientes(nome, idade, cep):
     clientes = carregar_cliente()
     
-    # Adiciona o novo cliente à lista
+    
     clientes.append({'nome': nome, 'idade': idade, 'CEP': cep})
     
-    # Abre o arquivo no modo de escrita
+    
     with open(arquivo_cliente, 'w') as f:
         json.dump(clientes, f, indent=4, ensure_ascii=False)
     
@@ -108,7 +108,7 @@ def buscar_cliente(nome):
     if not encontrado:
         print("❌ CLIENTE NÃO CADASTRADO!!!")
 
-# CRUD DO PRODUTO 
+
 
 def adicionar_produto(produto, preco, codigo):
     produtos = carregar_produto()
@@ -161,7 +161,7 @@ def excluir_produto(nome_produto):
         json.dump(produtos, f, indent=4, ensure_ascii=False)
     print("❌ PRODUTO EXCLUÍDO COM SUCESSO!")
 
-# CRUD DOS FORNCEDORES 
+
 
 def adicionar_fornecedor(cnpj):
     fornecedores = carregar_fornecedores()
@@ -218,8 +218,7 @@ def buscar_fornecedor(cnpj):
             encontrado = True
     if not encontrado:
         print("NENHUM FORNECEDOR CADASTRADO.")
-
-#MENUS 
+ 
 def menu_inicial():
     print("---->>> FLOWSTOCK <<<---- ")
     print(" 1 - MENU CLIENTE ")
